@@ -5,14 +5,33 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Trai_Contacts {
-    TrieNode root=new TrieNode();
+    public class Trie_Contacts {
+    TrieNode root;
+
+    public Trie_Contacts()
+    {
+        root = new TrieNode();
+    }
     public static void main(String[] args) {
-      Scanner in = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
+        Trie_Contacts obj = new Trie_Contacts();
         int n = in.nextInt();
         for(int a0 = 0; a0 < n; a0++){
             String op = in.next();
             String contact = in.next();
+
+            switch (op)
+            {
+                case "add":
+                    obj.addData(contact,obj.root);
+                    break;
+                case "find":
+                    System.out.println(obj.getCount(contact));
+                    break;
+                default:
+                    System.out.println("Unsupported operation");
+            }
+
         }
     }
 
@@ -20,18 +39,34 @@ public class Trai_Contacts {
     {
         TrieNode temp=null;
         if(input==null||input.isEmpty())
-               return;
-           char c= input.charAt(0);
+            return;
+        char c= input.charAt(0);
+        temp=node.linkArray[c-'a'];
+        if(temp==null)
+        {
             temp = new TrieNode();
-
             temp.c=c;
-            temp.count+=1;
-            temp.isWord=input.length()==1?true:false;
+        }
+        temp.count+=1;
+        temp.isWord=input.length()==1?true:false;
+        node.linkArray[c-'a']=temp;
 
-            node.list.add(c-'a',temp);
         addData(input.substring(1),temp);
 
 
+    }
+
+    public int getCount(String str)
+    {
+        TrieNode current = root;int count=0;
+        for (char c :str.toCharArray())
+        {
+            if(current.linkArray[c-'a']!=null)
+                current=current.linkArray[c-'a'];
+            else
+                return 0;
+        }
+        return current.count;
     }
 }
 
@@ -40,5 +75,10 @@ class TrieNode
     char c;
     int count=0;
     boolean isWord=false;
-    List<TrieNode> list;
+    TrieNode []linkArray;
+
+    TrieNode()
+    {
+        linkArray=new TrieNode[26];
+    }
 }
