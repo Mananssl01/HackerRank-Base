@@ -1,19 +1,18 @@
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
+package com.test.hr;
 
-public class Solution {  TrieNode root;
+import java.util.Scanner;
 
-    public Solution()
+public class Trie_Contacts {
+    TrieNode root;
+
+    public Trie_Contacts()
     {
         root = new TrieNode();
     }
 
-   public static void main(String[] args) {
+    public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        Solution obj = new Solution();
+        Trie_Contacts obj = new Trie_Contacts();
         int n = in.nextInt();
         for(int a0 = 0; a0 < n; a0++){
             String op = in.next();
@@ -33,7 +32,7 @@ public class Solution {  TrieNode root;
 
         }
     }
-     public void addData(String input,TrieNode node)
+    public void addData(String input,TrieNode node)
     {
         TrieNode temp=null;
         if(input==null||input.isEmpty())
@@ -43,7 +42,7 @@ public class Solution {  TrieNode root;
         if(temp==null)
         {
             temp = new TrieNode();
-            temp.c=c;
+            temp.c=(byte)(c-'a');
         }
         temp.count+=1;
         temp.isWord=input.length()==1?true:false;
@@ -53,7 +52,7 @@ public class Solution {  TrieNode root;
 
 
     }
-     public int getCount(String str)
+    public int getCount(String str)
     {
         TrieNode current = root;int count=0;
         for (char c :str.toCharArray())
@@ -65,17 +64,17 @@ public class Solution {  TrieNode root;
         }
         return current.count;
     }
-    
-    static class TrieNode
-{
-    char c;
-    int count=0;
-    boolean isWord=false;
-    TrieNode []linkArray;
 
-    TrieNode()
+    static class TrieNode
     {
-        linkArray=new TrieNode[26];
+        byte c;
+        int count=0;
+        boolean isWord=false;
+        TrieNode []linkArray;
+     
+        TrieNode()
+        {
+            linkArray=new TrieNode[26];
+        }
     }
-}
 }
