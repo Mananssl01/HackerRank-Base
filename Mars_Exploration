@@ -1,0 +1,26 @@
+package com.hackerrank.code;
+
+
+import java.util.Scanner;
+
+public class Mars_Exploration
+{
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        String S = in.next();
+        System.out.println(new Mars_Exploration().getErrorCount(S));
+    }
+
+    public int getErrorCount(String str)
+    {
+        int count=0;
+        char[]input = {'S','O','S'};
+        char [] array = str.toCharArray();
+
+        for (int i = 0; i <array.length ; i++)
+             if(array[i]!=input[i%3])
+                count++;
+
+            return count;
+    }
+}
