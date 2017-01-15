@@ -1,0 +1,35 @@
+package com.hackerrank.code;
+
+import java.util.Scanner;
+
+public class Caesar_Cipher {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int length = in.nextInt();
+        String str = in.next();
+        int key = in.nextInt();
+        System.out.println(new Caesar_Cipher().encoded(str,key));
+
+
+    }
+
+    public String encoded(String input, int key)
+    {
+        StringBuilder builder = new StringBuilder();
+        char [] array = input.toCharArray();
+
+        for (char c : array)
+        {
+            char replace;
+            if(Character.isAlphabetic(c))
+            {
+                replace=Character.isUpperCase(c)?'A':'a';
+                builder.append((char)(((c+key-replace)%26)+replace));
+            }
+             else
+                 builder.append(c);
+        }
+        return builder.toString();
+
+    }
+}
