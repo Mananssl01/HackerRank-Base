@@ -1,46 +1,30 @@
+package com.test.hr;
+
 // the class demostrate the second smallest element in unsorted array can be find in O(n+lg(n)-2) time.
-package com.hackerrank.code;
 
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
-public class Second_Smallest {
+        public class Second_Smallest {
     public static void main(String[] args) {
-        int[]array = {52,5,489,7,56,3,67,88,1,89,106,4,-12,-10};
+        int[]array = {1,-2,3,4,5,6,7};
         System.out.println(new Second_Smallest().getSecondSmallest(array) );
 
     }
-    public int getSecondSmallest(int [] input)
+     public String getSecondSmallest(int [] input)
     {
         if(input==null || input.length<1)
-            return -1;
-        int min=input[0];List<Integer> list = new ArrayList<>();
-        for (int i = 1; i <input.length ; i++) {
-            if(min<input[i])
+            return "invalid";
+        int min=Integer.MAX_VALUE,secMin=Integer.MAX_VALUE;
+        for (int i = 0; i <input.length ; i++) {
+            if(input[i]<min)
             {
-                list.add(input[i]);
-            }else
-                {
-                    list.clear();
-                    list.add(min);
-                    min=input[i];
-                }
-
+                // here both values are set in 1 comparison
+                secMin=min;
+                min=input[i];
+             }else if(input[i]<secMin)
+                 secMin=input[i];
         }
-        // now list contains all the elements which were comapred with min.So, next min. element will be
-        // one of those.list size is max O(lg(n))
-        if(list.size()<1)
-            return -1;
-        int secondMin=list.get(0);
-        for (int i = 1; i <list.size() ; i++) {
-            if(secondMin>list.get(i))
-                secondMin=list.get(i);
-
-        }
-        return secondMin;
+            return Integer.toString(secMin);
     }
 }
 
