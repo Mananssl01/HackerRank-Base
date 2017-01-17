@@ -1,0 +1,35 @@
+//    Find the length of maximum number of consecutive numbers jumbled up in an array
+//    e.g.: 1, 94, 93, 1000, 2, 92, 1001 should return 3 for 92, 93, 94
+
+
+package com.test.hr;
+
+import java.util.Arrays;
+
+public class LongestConsecutiveSequence {
+    public static void main(String[] args) {
+        int[]array = {1, 94, 93, 1000, 2, 92, 1001,91,84,90};
+        System.out.println(new LongestConsecutiveSequence().getLongest(array));
+    }
+
+    public int getLongest(int[]array)
+    {
+        int max=0;int maximum=0;
+        Arrays.sort(array);
+        int i=0;int j=i+1;
+        while (j<array.length)
+        {
+            if(array[j]-array[i]==1)
+            {
+                i++;j++;max++;
+            }else
+            {
+                max=0;
+                i++;j++;
+            }
+            if(maximum<max)
+                maximum=max;
+        }
+        return maximum+1;
+    }
+}
