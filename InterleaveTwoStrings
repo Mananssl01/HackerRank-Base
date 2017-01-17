@@ -1,0 +1,25 @@
+// the following class interleaves two strings and prints out all combinations in which alphabets are in order.
+//for example for Strings "abc" and "de" - {"adebc, abdec, adbce, deabc, dabce"..etc}
+ package com.test.hr;
+
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class InterleaveTwoStrings {
+    static Set<String> set = new HashSet<>();
+    public static void main(String[] args) {
+        String str1="abcdef";String str2="xxx";
+        InterleaveTwoStrings obj = new InterleaveTwoStrings();
+        obj.interleaving(str1,str2,0);
+        obj.interleaving(str2,str1,0);
+        System.out.println("results : "+set.size());
+        System.out.println("Set : "+set);
+    }
+
+     private void interleaving(String string1,String string2,int index)
+    {
+        while (index++<string1.length())
+            set.add(string1.substring(0,index)+string2+string1.substring(index));
+    }
+}
