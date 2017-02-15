@@ -10,7 +10,7 @@ import java.util.Queue;
 public class MaxSumLevel {
     public static void main(String[] args)
     {
-        TreeNode root = new TreeNode(4);
+        TreeNode root = new TreeNode(444);
         root.left=new TreeNode(3);
         root.right=new TreeNode(2);
         root.left.right = new TreeNode(16);
@@ -18,16 +18,19 @@ public class MaxSumLevel {
         root.right.right=new TreeNode(7);
         root.right.left.left=new TreeNode(10);
         root.right.left.right= new TreeNode(5);
-        root.right.right.right = new TreeNode(41);
+        root.right.right.right = new TreeNode(1);
 
-    new MaxSumLevel().getMaxSumLevel(root);
-    System.out.println("empty tree");
+    new MaxSumLevel().getMaxSumLevel(null);
+
     }
 
     public void getMaxSumLevel(TreeNode root)
     {
         if(root==null)
+        {
+            System.out.println("empty tree");
             return;
+        }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
         queue.add(null);
