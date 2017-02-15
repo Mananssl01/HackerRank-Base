@@ -1,0 +1,80 @@
+// the following class demonstrate the level with the max sum in a binary tree.
+// using double Queue version with swapping
+package com.hackerrank.code;
+
+
+import java.util.*;
+
+public class MaxSumLevelUsingTwoQueues {
+    public static void main(String[] args)
+    {
+        TreeNode root = new TreeNode(4);
+        root.left=new TreeNode(3);
+        root.right=new TreeNode(2);
+        root.left.right = new TreeNode(16);
+        root.right.left=new TreeNode(11);
+        root.right.right=new TreeNode(7);
+        root.right.left.left=new TreeNode(10);
+        root.right.left.right= new TreeNode(5);
+        root.right.right.right = new TreeNode(111);
+
+        new MaxSumLevelUsingTwoQueues().getMaxSumLevel(root);
+
+    }
+
+    public void getMaxSumLevel(TreeNode root)
+    {
+        if(root==null)
+        {
+            System.out.println("empty tree");
+            return;
+        }
+        Queue<TreeNode> queue1 = new LinkedList<>();
+        Queue<TreeNode> queue2 = new LinkedList<>();
+        queue1.add(root);
+        TreeNode temp=null;int sum=0;int max=0;int level=-1;int drop=0;Queue<TreeNode> tempQueue=null;
+        while (!queue1.isEmpty())
+        {
+
+            temp=queue1.poll();
+
+            if(temp.left!=null)
+                queue2.add(temp.left);
+            if(temp.right!=null)
+                queue2.add(temp.right);
+            sum+=temp.data;
+            if(queue1.isEmpty())
+            {
+                level+=1;
+                if(sum>max)
+                {
+                    max=sum;
+                    sum=0;
+                    drop=level;
+                }
+                //swap the queues
+                tempQueue = queue1;
+                queue1=queue2;
+                queue2=tempQueue;
+
+        }
+        }
+        System.out.println("max sum is "+max+" at level "+drop);
+    }
+    static class TreeNode
+    {
+        int data;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int data)
+        {
+            this.data=data;
+            this.left=null;
+            this.right=null;
+        }
+    }
+}
+
+
+
