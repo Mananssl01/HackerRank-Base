@@ -1,0 +1,75 @@
+// the following class demonstrate the level with the max sum in a binary tree.
+// using 'null' delimiter version
+package com.hackerrank.code;
+
+
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class MaxSumLevel {
+    public static void main(String[] args)
+    {
+        TreeNode root = new TreeNode(4);
+        root.left=new TreeNode(3);
+        root.right=new TreeNode(2);
+        root.left.right = new TreeNode(16);
+        root.right.left=new TreeNode(11);
+        root.right.right=new TreeNode(7);
+        root.right.left.left=new TreeNode(10);
+        root.right.left.right= new TreeNode(5);
+        root.right.right.right = new TreeNode(41);
+
+    new MaxSumLevel().getMaxSumLevel(root);
+    System.out.println("empty tree");
+    }
+
+    public void getMaxSumLevel(TreeNode root)
+    {
+        if(root==null)
+            return;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(null);
+        TreeNode temp=null;int sum=0;int max=0;int level=-1;int drop=0;
+        while (!queue.isEmpty())
+        {
+            temp=queue.poll();
+            if(temp==null)
+            {
+                level+=1;
+                if(sum>max)
+                {
+                    max=sum;
+                    sum=0;
+                    drop=level;
+                }
+                if(queue.isEmpty())
+                    break;
+                queue.add(null);
+                continue;
+            }
+            if(temp.left!=null)
+                queue.add(temp.left);
+            if(temp.right!=null)
+                queue.add(temp.right);
+            sum+=temp.data;
+        }
+        System.out.println("max sum is "+max+" at level "+drop);
+    }
+}
+
+
+ class TreeNode
+{
+    int data;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int data)
+    {
+        this.data=data;
+        this.left=null;
+        this.right=null;
+    }
+}
