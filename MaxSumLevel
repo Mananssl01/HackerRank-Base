@@ -3,9 +3,7 @@
 package com.hackerrank.code;
 
 
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class MaxSumLevel {
     public static void main(String[] args)
@@ -60,19 +58,20 @@ public class MaxSumLevel {
         }
         System.out.println("max sum is "+max+" at level "+drop);
     }
-}
-
-
- class TreeNode
-{
-    int data;
-    TreeNode left;
-    TreeNode right;
-
-    TreeNode(int data)
+    static class TreeNode
     {
-        this.data=data;
-        this.left=null;
-        this.right=null;
+        int data;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode(int data)
+        {
+            this.data=data;
+            this.left=null;
+            this.right=null;
+        }
     }
 }
+
+
+
