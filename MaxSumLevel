@@ -20,7 +20,7 @@ public class MaxSumLevel {
         root.right.left.right= new TreeNode(5);
         root.right.right.right = new TreeNode(1);
 
-    new MaxSumLevel().getMaxSumLevel(null);
+    new MaxSumLevel().getMaxSumLevel(root);
 
     }
 
