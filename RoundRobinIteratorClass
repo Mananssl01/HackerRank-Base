@@ -1,0 +1,77 @@
+// implement an Iterator class that stores a  list of built-in Iterators. Implement next() and hasNext() method in
+// a round robin fashion.
+package com.hackerrank.code;
+
+
+import java.util.*;
+
+
+public class RoundRobinIteratorClass implements Iterator<Object> {
+    private static List<Iterator> itrList = new ArrayList<>();
+    int index=-1;Iterator<String> temp;
+
+    public static void main(String[] args) {
+        // test iterator
+        String[] arr = {"AAA","ZZZ","MMM","KKK"};
+        List<String> list = new ArrayList<>();
+        list.add("a");
+        list.add("b");
+        list.add("c");
+        list.add("x");
+        list.add("y");
+
+        Set<Point> set = new HashSet<>();
+        set.add(new Point(2,-2));
+        set.add(new Point(0,-8));
+        set.add(new Point(7,4));
+        set.add(new Point(17,14));
+
+        // add all the iterators to the list
+        itrList.add(list.iterator());
+        itrList.add(Arrays.asList(arr).iterator());
+        itrList.add(set.iterator());
+
+        RoundRobinIteratorClass obj = new RoundRobinIteratorClass();
+        while (obj.hasNext())
+            System.out.println("result "+obj.next());
+
+    }
+
+    @Override
+    public boolean hasNext() {
+        int listCount=0;
+        int idx = ++index %itrList.size();
+        temp=itrList.get(idx);
+        while (!temp.hasNext()&&listCount<itrList.size())
+        {
+            idx = ++index %itrList.size();
+            temp=itrList.get(idx);
+            listCount++;
+        }
+        return temp.hasNext();
+
+    }
+
+    @Override
+    public Object next() {
+        return temp.next();
+
+    }
+}
+
+class Point
+{
+    int x;
+    int y;
+
+    Point (int a, int b)
+    {
+        x=a;
+        y=b;
+    }
+
+    public String toString()
+    {
+        return x+"--"+y;
+    }
+}
