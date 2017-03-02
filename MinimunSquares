@@ -1,0 +1,36 @@
+// given a rectangular paper, find the minimum number of sqaure that can be cut through it.
+// eg - if rect is 13*29 , total 9 squares can be made from it.
+// 2(13*13) +4(3*3)+3(1*1) = 2+4+3 = 9
+//similarly if rect. is 4*5 , total of 1 squares
+// 1(4*4) +4(1*1)  = 1+4 =5
+
+package com.hackerrank.code;
+
+
+public class MinimunSquares {
+
+    public static void main(String[] args) {
+        System.out.println(new MinimunSquares().getMinimumCount(1,4));
+    }
+
+    public int getMinimumCount(int length, int breadth)
+    {
+        int count=0;
+        if(length==breadth)
+            return length==0?0:1;
+        while (length!=breadth&&length!=0&&breadth!=0)
+        {
+            if(length>breadth)
+            {
+                count+=(int)(length/breadth);
+                length%=breadth;
+            }else
+                {
+                    count+=(int)(breadth/length);
+                    breadth%=length;
+                }
+        }
+        return count;
+    }
+
+}
