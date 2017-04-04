@@ -1,0 +1,49 @@
+// class to merge two sorted arrays.
+package com.test;
+
+
+import java.util.Arrays;
+
+public class SortedArrayClass {
+
+    public static void main(String[] args) {
+        int [] array1 ={1,1,1};
+        int [] array2 = {-3,2,4,6,8};
+        int [] result= new SortedArrayClass().getSorted(array1,array2);
+        Arrays.stream(result).forEach(System.out::println);
+
+    }
+
+    public int[] getSorted(int [] a, int []b)
+    {
+        if((a==null||a.length<1)&&(b==null||b.length<1))
+            return null;
+        if(a==null||a.length<1)
+            return b;
+        if(b==null||b.length<1)
+            return a;
+        int x=0,y=0,z=0;
+        int [] result = new int[a.length+b.length];
+
+        while (z<result.length)
+        {
+            if(x>=a.length)
+            {
+                result[z++]=b[y++];
+                continue;
+            }
+            if(y>=b.length)
+            {
+                result[z++]=a[x++];
+                continue;
+            }
+
+            result[z++]=a[x]<b[y]?a[x++]:b[y++];
+        }
+
+           return result;
+
+
+
+    }
+}
