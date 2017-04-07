@@ -1,0 +1,58 @@
+// Given a 2D array in the form of 'm*n' rectangle ,each row contains two digits only . 0/1, in such a way that all 1's
+// are accommodated towards left and all 0's are accommodated towards right. There is no '1' between and two 0's and vice versa.
+// Find the row with maximum number of zeros.Find out this in linear time.
+
+/* for example , 4*4 matrix can be
+                1 1 1 0
+                1 0 0 0
+                1 1 0 0
+                0 0 0 0
+    should return '3' , the index of last row , and total number of maximum zeros in that row. There can be multiple rows having the
+     maximum */
+
+package com.test;
+
+
+public class MatrixClass {
+    public static void main(String[] args) {
+        byte [][]array = new byte[4][4];
+        array[0][0]=1;array[0][1]=1;array[0][2]=1;array[0][3]=0;
+
+        array[1][0]=1;array[1][1]=0;array[1][2]=0;array[1][3]=0;
+
+        array[2][0]=1;array[2][1]=1;array[2][2]=0;array[2][3]=0;
+
+        array[3][0]=0;array[3][1]=0;array[3][2]=0;array[3][3]=0;
+
+        new MatrixClass().getMaxZeroIndex(array);
+
+    }
+
+    public void getMaxZeroIndex(byte [][]array)
+    {
+        if(array==null || array.length==0)
+        {
+            System.out.println("invalid input array");
+            return;
+        }
+        int count=0;int resultIndex=0;
+        int length= array[0].length;
+        int breadth = array.length;
+        int i=0;int j=length-1;
+        while (i<breadth&&j>=0)
+        {
+            if(array[i][j]==0)
+            {
+                count++;
+                resultIndex=i;
+                j--;
+            }else
+                i++;
+
+
+        }
+        System.out.println("Maximum zeros are "+count+" in the row "+resultIndex);
+
+
+    }
+}
