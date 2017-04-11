@@ -1,0 +1,55 @@
+// The following class shifts a given array in place with a shift factor.The array should be in place.
+// for example array {1,6,3,7,8,0} and shift factor =2 will generate {8,0,1,6,3,7}
+
+
+
+package com.test;
+
+
+import java.util.Arrays;
+
+public class ShiftArrayClass {
+    public static void main(String[] args) {
+        int [] array = {1,6,3,7,8,0};int shift=2;
+
+        // 1)    -One solution can be not to touch the array but simply change the position of start pointer
+
+        // for left shift
+        System.out.println();
+        for (int i = 0; i <array.length ; i++)
+            System.out.print(" "+array[(i+shift)%array.length]);
+
+        System.out.println();
+
+        // for right shift
+        for (int i = 0; i <array.length ; i++)
+            System.out.print(" "+array[(i+(array.length-shift))%array.length]);
+
+
+        // 2)  - another can be to use a backup array of the same size and copy the new locations to it.This will take additional space of linear size of elements.
+
+        int [] backUp = new int[array.length];
+
+        // for right shift
+        for (int i = 0; i <array.length ; i++)
+            backUp[(i+shift)%backUp.length]=array[i];
+
+        System.out.println();
+
+        //print the new array
+        Arrays.stream(backUp).forEach(System.out::print);
+
+        // for left shift
+        for (int i = 0; i <array.length ; i++)
+            backUp[(i+(array.length-shift))%backUp.length]=array[i];
+
+        System.out.println();
+        //print the new array
+        Arrays.stream(backUp).forEach(System.out::print);
+
+    }
+
+
+
+
+}
