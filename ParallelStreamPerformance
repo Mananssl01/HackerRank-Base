@@ -1,0 +1,46 @@
+// this class demonstrate how the parallel stream distributes the tasks to all the available CPU cores and engage them 100 %
+// as compared to serial version.In 8 core processors it reduces times from 88 sec. to just 12 sec.
+
+package com.test;
+
+
+import java.util.*;
+
+public class ParallelStreamPerformance {
+    public static void main(String[] args) {
+        ParallelStreamPerformance obj = new ParallelStreamPerformance();
+        Random rand = new Random();
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <1000000 ; i++)
+            list.add(rand.nextInt());
+
+        System.out.println("start..number of available cores "+Runtime.getRuntime().availableProcessors());
+        Date date= new Date();
+
+        int result =0;
+
+        // serial execution
+        /*for (int i:list)
+              result+=obj.getFooValue(i);*/
+
+        // parallel execution
+        result=list.parallelStream().map(i->obj.getFooValue(i)).reduce(Integer::sum).get();
+
+
+        long diff = Calendar.getInstance().getTime().getTime()-date.getTime();
+        System.out.println("result is "+result+" in time "+diff );
+
+
+    }
+
+    // function to do just an intensive task
+    public int getFooValue(int n)
+    {
+        for (int i = 1; i <10000; i++) {
+            n=(n^i)%i;
+            if(n<=0)
+                n=10;
+        }
+        return n;
+    }
+}
