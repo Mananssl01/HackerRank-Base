@@ -1,0 +1,60 @@
+// given a number N , find ou the total count of the Strings which do not contains two/more consecutive '1's in its binary Representation.
+// For example if N= 2, ans - 3 as out of 4 binary representations{00,01,10,11} , first 3 are counted. For N =3 , ans -5 as out of 8 binary strings {000,001,010,011,100,101,110,111} only 5 Strings are valid.
+// One approach can to create a String array for 2^N size , and examine each String for validation. But this is O(2^N) solution which is exponential.
+// Other can be using the Dynamic programming to reuse the earlier result for the newer one.
+
+/*  note the pattern that for N = 3 , total valid combinations are {000,001,010,100,101} which looks like
+         '0' concatenate with total valid combination of N=2 {00,01,10} + '10' concatenate with total valid combination of N=1 {0,1}
+         Hence the recurrance representation can be written as
+         f(n) = '0'+f(n-1) (+) '10'+f(n-2) , where the operator (+) acts as addition and other '+' operators as concatenation
+         and getCount can be getCount(N)= getCount(N-1)+ getCount(N-2)
+         There can be two versions to calculate count , recursive and Iterative
+*/
+
+package com.test.mcafee;
+
+
+public class GetBinaryStringClass {
+    public static void main(String[] args) {
+        GetBinaryStringClass obj = new GetBinaryStringClass();
+        System.out.println(obj.getCountRecursive(4));
+        System.out.println(obj.getCountIterative(4));
+    }
+
+    // recursive version
+    public int getCountRecursive(int N)
+    {
+       if(N<0)
+           throw new IllegalArgumentException("Invalid input , cannot be negative");
+        if(N==0)
+           return 1;
+        if(N==1)
+            return 2;
+        return getCountRecursive(N-1)+getCountRecursive(N-2);
+
+    }
+
+    // Iterative version
+
+    public int getCountIterative(int N)
+    {
+        if(N<0)
+            throw new IllegalArgumentException("Invalid input , cannot be negative");
+        int a=1;int b=2;int c=0;
+        if(N==0)
+            return a;
+        if(N==1)
+            return b;
+        int i=2;
+        while (i<=N)
+        {
+            c=a+b;
+            a=b;
+            b=c;
+            i++;
+        }
+        return c;
+
+
+    }
+}
