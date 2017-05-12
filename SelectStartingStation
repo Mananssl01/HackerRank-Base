@@ -1,0 +1,44 @@
+/*  Problem statement - There is a circular path and there are some fuel stations along with the path. A fuel station can give a limited amount of fuel.The distance between two stations is never
+ the same.
+ A motorist has to start (with no fuel) from a station such that he can travel to the complete circular path returning to the original starting station.Given two arrays
+ Fuel [] and Dist [] (of equal lenght)which have the 'fuel' and 'distance' to next station, return the station from where the motorist should start. if no such
+ station exists, return -1;  */
+
+package com.test.mcafee;
+
+
+public class SelectStartingStation {
+    public static void main(String[] args) {
+        int[] input1 = {1,2,3,4,5,17};int[] input2 = {1,2,3,4,6,12};
+    System.out.println(new SelectStartingStation().getStartingIndex(input1,input2));
+    }
+
+    public int getStartingIndex(int[]fuel,int[]dist)
+    {
+       if(fuel==null||fuel.length==0||dist==null||dist.length==0||(fuel.length!=dist.length))
+           throw  new IllegalArgumentException("Invalid array paramters");
+        int move=0;int fuelSum=0;int distSum=0;int index=0;int count=0;
+            while (count<fuel.length)
+            {
+                if(index>fuel.length)
+                    return -1;
+                fuelSum+=fuel[move%fuel.length];
+                distSum+=dist[move%fuel.length];
+
+                if(fuelSum>=distSum)
+                {
+                    count++;
+                }
+                else
+                    {
+                        fuelSum=distSum=count=0;
+                        index=move+1;
+                    }
+                move++;
+
+            }
+       return index;
+
+
+    }
+}
