@@ -1,0 +1,111 @@
+// given a Graph G(V,E), find out the maximum distance between two nodes in the graph.
+// OR given a binary/n-ary tree , find the longest path between two nodes in the tree.
+
+package com.test.mcafee;
+
+
+import com.test.flatten.Function;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
+
+public class LongestPathInTree
+{
+    public static void main(String[] args) {
+        Node root = new Node(4);
+
+        Node root1 = new Node(3);
+        Node root2 = new Node(13);
+
+        root.list.add(root1);
+        root.list.add(root2);
+        root1.list.add(root);
+        root2.list.add(root);
+
+        Node root3 = new Node(1);
+        Node root4 = new Node(6);
+
+        root1.list.add(root3);
+        root1.list.add(root4);
+        root3.list.add(root1);
+        root4.list.add(root1);
+
+        Node root5 = new Node(7);
+        Node root6 = new Node(8);
+
+        root2.list.add(root5);
+        root2.list.add(root6);
+        root5.list.add(root2);
+        root6.list.add(root2);
+
+        Node root7 = new Node(23);
+        root3.list.add(root7);
+        root7.list.add(root3);
+
+        Node root8 = new Node(11);
+        root6.list.add(root8);
+        root8.list.add(root6);
+
+        Node root9 = new Node(-9);
+        root7.list.add(root9);
+        root9.list.add(root7);
+
+        // the algo below works for the cyclic graph as well. Node '10' has 2 parents '-9' and '8'. In this case the longest path will be between nodes '6' and '10'.
+        //enable the lines below to check it.
+       /* Node root10 = new Node(10);
+        root9.list.add(root10);
+        root8.list.add(root10);
+        root10.list.add(root9);
+        root10.list.add(root8);*/
+
+        // find the longest path between two nodes in the tree
+         Node other = function.apply(root);
+         Node result = function.apply(other);
+         System.out.println("Longest path in the tree is between nodes "+result.data+" - "+other.data);
+    }
+
+    // create a lambda function to get longest path from a given node
+     private static Function<Node,Node> function = (node)->
+    {
+        Queue<Node> queue = new LinkedList<>();
+        //Define an arraylist for this problem only to keep the track of deleted nodes..don't use in general BFS algo
+        List<Node> list = new ArrayList<>();
+        Node temp=null;
+        queue.add(node);
+        while (!queue.isEmpty())
+        {
+            temp=queue.poll();
+            list.add(temp);
+            if(temp.list.size()>0)
+                for (Node n:temp.list)
+                    if(!n.isDone)
+                         queue.add(n);
+            temp.isDone=true;
+        }
+        // now reset all the 'isDone' to false as we have to call the lambda function again. Here we need it as we are calling BFS twice , so need to reset visited(isDone) data before calling again.
+        list.stream().forEach(e->e.isDone=false);
+
+        return temp;
+    };
+
+    static class Node
+    {
+        int data;
+        boolean isDone;
+        List<Node> list;
+
+        Node(int dat)
+        {
+            this.data=dat;
+            this.list= new ArrayList<>();
+            this.isDone=false;
+        }
+    }
+
+}
+
+
+
+
