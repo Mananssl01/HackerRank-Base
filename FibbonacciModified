@@ -1,0 +1,30 @@
+package com.test.hr;
+import java.math.BigInteger;
+import java.util.Scanner;
+import java.util.function.Function;
+
+
+public class FibbonacciModified {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        int a = in.nextInt();
+        int b = in.nextInt();
+        int c = in.nextInt();
+        int[]input = {a,b,c};
+        System.out.println(function.apply(input));
+    }
+
+    private static Function<int [], BigInteger> function= (args)->
+    {
+
+        BigInteger[] array = new BigInteger[args[2]];
+        array[0]=BigInteger.valueOf(args[0]);
+        array[1]=BigInteger.valueOf(args[1]);
+
+        // sum others
+        for (int i = 2,j=array.length; i <j ; i++)
+              array[i]=array[i-2].add((array[i-1].pow(2)));
+
+        return array[args[2]-1];
+    };
+}
