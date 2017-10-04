@@ -1,0 +1,50 @@
+// given a 'source' string and a 'target' string, find out all the index of target in the source, where the target can appear in any order
+// in the source starting from that index.
+// for example if s= "acbwubcalacbac"  and t = "abc" , the indexes are 0,5,9,10,11  for the substrings (acb,bca,acb,cba,bac)
+
+package com.test.mcafee;
+
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.BiConsumer;
+
+public class MatchStringClass {
+    public static void main(String[] args) {
+        // lambda function for the comparision step
+        BiConsumer<String,String> biConsumer = (src,tar)->
+        {
+            int length = tar.length();
+            Map<Character,Integer> map = new HashMap<>(length);      // store target string chars in hashmap as lookup is O(1).
+            Integer cons = new Integer(0);
+            for (char c: tar.toCharArray())
+                map.put(c,cons);
+            char [] array = src.toCharArray();
+            int i=0,j=0;int k = array.length;int count=0;
+            while (j<k)
+            {
+                if(map.containsKey(array[j]))
+                {
+                    j++;count++;
+                    // count is been decremented to address multiple possible combinations within the target length.
+                    if(count==length)
+                    {
+                        System.out.println("index found at "+(j-length));   // (j-length) will give starting index of the paasing string.
+                        count--;
+                    }
+
+                }else
+                {
+                    i=j+1;count=0;j=i;
+                }
+
+
+            }
+
+        };
+
+        biConsumer.accept("acbwubcalacbac","abc");
+
+    }
+
+}
