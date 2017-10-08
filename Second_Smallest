@@ -10,7 +10,7 @@ package com.test.hr;
         System.out.println(new Second_Smallest().getSecondSmallest(array) );
 
     }
-     public String getSecondSmallest(int [] input)
+     public int getSecondSmallest(int [] input)
     {
         if(input==null || input.length<1)
             return "invalid";
@@ -24,7 +24,7 @@ package com.test.hr;
              }else if(input[i]<secMin)
                  secMin=input[i];
         }
-            return Integer.toString(secMin);
+            return secMin;
     }
 }
 
