@@ -1,0 +1,48 @@
+// given an unsorted array and a window of length k (k<array.length),print out the minimum element of the window as the window slides from
+//left to right by one cell per step.
+package com.hr;
+
+
+import java.util.function.BiFunction;
+
+public class SlidingWindowClass {
+    private static int [] array ={3,15,10,2,14,6,1,12,0,45,4,17};
+    public static void main(String[] args) {
+        new SlidingWindowClass().printMinimum(array,3);
+    }
+
+    public void printMinimum(int [] array, int size)
+    {
+        int minIndex = -1;
+
+        for (int i = 0,j=size-1,k=array.length; j<k ; i++,j++) {
+              if(minIndex<i)
+                  minIndex=biFunction.apply(i,j);
+               if(minIndex>=i&&array[minIndex]>array[j])
+                    minIndex=j;
+
+
+            System.out.println("minimum number of window "+i+" and "+j+" is "+array[minIndex]);
+
+
+        }
+    }
+
+    private BiFunction<Integer,Integer,Integer> biFunction = (start,end)->
+    {
+        int minIdx=0;int min=Integer.MAX_VALUE;
+
+        for (int i = start,j=end; i <j ; i++)
+        {
+            if(min>array[i])
+            {
+                min=array[i];
+                minIdx=i;
+            }
+        }
+        return minIdx;
+
+    };
+
+
+}
