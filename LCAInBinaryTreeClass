@@ -1,0 +1,37 @@
+
+ // Definition for a binary tree node.
+  public class TreeNode {
+      int val;
+      TreeNode left;
+      TreeNode right;
+      TreeNode(int x) { val = x; }
+  }
+ 
+class LCAInBinaryTreeClass {
+
+public static void main(String ...ars)
+{
+
+}
+
+public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+         
+        // base case, assuming that both the ints are present in the tree.
+          if(root==null)
+            return null;
+        /* if root node contains any of the two numbers, it is LCA , as we are assuming
+         that another key wouls also be present somewhere down, but we don't go
+         after that.*/
+          if(root.val==p.val || root.val==q.val)
+            return root;
+        // find left and right
+     TreeNode   l_lca = lowestCommonAncestor(root.left,p,q);
+     TreeNode   r_lca = lowestCommonAncestor(root.right,p,q);
+        // if both are not null, means both subtrees contains 1 number each, in which 
+        //case , root becomes LCA
+        if(l_lca!=null && r_lca!=null)
+          return root;
+        // else non-null elements contains LCA
+        return l_lca!=null ? l_lca : r_lca; 
+    }
+}
