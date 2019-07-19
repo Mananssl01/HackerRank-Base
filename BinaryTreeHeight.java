@@ -15,14 +15,7 @@ class Node {
 
 class Solution {
 
-	
-    class Node 
-    {
-    	int data;
-    	Node left;
-    	Node right;
-	  }
-	public static int height(Node root) {
+public static int height(Node root) {
       	if(root==null)
           return -1;
         if(root.left==null && root.right==null)
