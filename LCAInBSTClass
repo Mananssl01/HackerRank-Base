@@ -1,3 +1,4 @@
+package com.test.hackerrank.others;
 // class to finf LCA in BInary search tree. Note that time taken for finding in LCA in BST is lg(n), as opposed to O(n) 
 // in binary tree as in BST we only consider one subtree to LCA , not both.
 
