@@ -19,7 +19,7 @@ public class GemStone {
 
     }
 
-    public int getGemElementCount(String[]array, int total)
+    public int getGemElementCount(String[]array)
     {
         int count=0;
         Set<Character> set= new HashSet();
@@ -34,7 +34,7 @@ public class GemStone {
         }
         for (byte b:input)
         {
-            if(b==total)
+            if(b==array.length)
                 count++;
         }
        return count;
