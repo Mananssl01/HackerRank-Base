@@ -1,5 +1,9 @@
+//NOTE -> The LCA problem cn also be solved more efficiently by Dynamic Programming approach , also known a 'Binary Lifting'. The preprocessing time is O(nlgn) 
+//for filling up the node-parent matrix and after that O(lgn time is taken). more details at - https://www.geeksforgeeks.org/lca-in-a-tree-using-binary-lifting-technique/
 
- // Definition for a binary tree node.
+
+
+// Definition for a binary tree node.
   public class TreeNode {
       int val;
       TreeNode left;
