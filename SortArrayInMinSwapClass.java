@@ -2,6 +2,10 @@
 
 // given an unordered array containing n consecutive integers with no duplicate, find min. number os swaps to sort it . in one swap, only two elements can be swapped.
 // solution hint - since given numbers are consecutive without duplicates , the 'index' should contain the element 'index+1' in the sorted array.
+
+// update - 9th April 2021. better solution is to rtraverse array linearly and for each element just see whether the previuos element is present or not. 
+// if not, then that element is the 'first' element of sorted list. loop within and see while incrementing each time , the element is within the list or not, keepa count. 
+// of there is not number of any incremented number, then it is the 'last' element of the array . then just reshuffle the aray from 'first' to 'last' element.
 package com.test.hr;
 
 import java.util.function.Function;
