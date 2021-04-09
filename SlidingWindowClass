@@ -1,5 +1,9 @@
 // given an unsorted array and a window of length k (k<array.length),print out the minimum element of the window as the window slides from
 //left to right by one cell per step.
+
+// update - 9th April, 2021
+// better solution with log time complexity is to use heap in th link . link - https://www.youtube.com/watch?v=LiSdD3ljCIE&t=783s
+
 package com.hr;
 
 
